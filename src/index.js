@@ -1,17 +1,18 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import "./index.css";
+import {createRoot} from "react-dom/client";
+import {Canvas} from "@react-three/fiber";
+import {Scene} from "./Scene";
+import { Physics } from '@react-three/cannon';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+
+createRoot(document.getElementById("root")).render(
+<Canvas>
+  <Physics>
+    {/* set up the broadphase which is the algorithm that determines which objects can collide with which other objects */}
+    broadphase="SAP" 
+    {/* set up gravity but not as high as we experience it on earth so the car can make jumps*/} 
+    gravity=[[0, -2.6, 0]] // 
+  <Scene />
+  </Physics>
+</Canvas>
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
