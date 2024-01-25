@@ -6,6 +6,7 @@ import {useWheels} from "./useWheels";
 import { WheelDebug } from "./WheelDebug";
 import { useControls } from "./useControls";
 import { Vector3, Quaternion } from "three";
+import { Controls } from "./Controls";
 
 //  the physics body properties define how the car behaves in the physics simulation,
 // while the adjustments in the useEffect hook control the visual appearance of the loaded car model in the scene.
@@ -29,6 +30,7 @@ export function Car({thirdPerson}){
     
     const [wheels, wheelInfos] = useWheels(width,height,front,wheelRadius);
 
+    
     const [vehicle,vehicleAPi] = useRaycastVehicle(() => ({
         chassisBody,
         wheelInfos,
@@ -38,6 +40,7 @@ export function Car({thirdPerson}){
     );
 
     useControls(vehicleAPi, chassisApi);
+
 
     useFrame((state) => {
         if (!thirdPerson) return;
