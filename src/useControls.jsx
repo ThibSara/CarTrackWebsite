@@ -37,7 +37,7 @@ export const useControls = (vehicleApi, chassisApi) => {
     }, []);
 
     useEffect(() => {
-        if (controls.w) {
+        if (controls.z) {
             vehicleApi.applyEngineForce(150, 2);
             vehicleApi.applyEngineForce(150, 3);
         } else if (controls.s) {
@@ -47,6 +47,25 @@ export const useControls = (vehicleApi, chassisApi) => {
             vehicleApi.applyEngineForce(0, 2);
             vehicleApi.applyEngineForce(0, 3);
         }
+
+        if (controls.q) {
+            vehicleApi.setSteeringValue(0.35, 2);
+            vehicleApi.setSteeringValue(0.35, 3);
+            vehicleApi.setSteeringValue(-0.1, 0);
+            vehicleApi.setSteeringValue(-0.1, 1);
+        }
+        else if (controls.d){
+            vehicleApi.setSteeringValue(-0.35, 2);
+            vehicleApi.setSteeringValue(-0.35, 3);
+            vehicleApi.setSteeringValue(0.1, 0);
+            vehicleApi.setSteeringValue(0.1, 1);
+        }
+        else {
+            for (let i = 0; i < 4; i++) {
+                vehicleApi.setSteeringValue(0, i);
+            } 
+        }
+
     }, [controls,vehicleApi,chassisApi]);
 
     return controls;

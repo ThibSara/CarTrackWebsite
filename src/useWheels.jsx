@@ -42,7 +42,7 @@ export  const useWheels= (width, height, front,radius) => {
 
     }];
 
-    const propsFunc =()=>({
+    const propsFunc =() => ({
         collisionFilterGroup:0, //  the group bitmask of the body
         mass:1,
         shapes :[

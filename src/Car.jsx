@@ -4,7 +4,7 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { useBox, useRaycastVehicle } from "@react-three/cannon";
 import {useWheels} from "./useWheels";
 import { WheelDebug } from "./WheelDebug";
-
+import { useControls } from "./useControls";
 
 //  the physics body properties define how the car behaves in the physics simulation,
 // while the adjustments in the useEffect hook control the visual appearance of the loaded car model in the scene.
@@ -35,6 +35,8 @@ export function Car(){
     }),
     useRef(null)
     );
+
+    useControls(vehicleAPi, chassisApi);
 
 
     useEffect(() => {
