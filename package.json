@@ -1,7 +1,8 @@
 {
-  "name": "my-app",
+  "name": "vroom-vroom",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://oieoie.com/vroom-vroom",
   "dependencies": {
     "@react-three/cannon": "^6.6.0",
     "@react-three/drei": "^9.96.0",
@@ -17,7 +18,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build --base-href =/vroom-vroom/",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
