@@ -25,9 +25,7 @@ export function Track() {
 
   // Rendu du composant
   return (
-    <mesh>
-      {/* Utilisation de primitive pour rendre la géométrie du modèle 3D */}
-      <primitive object={geometry} attach="geometry" />
+    <mesh geometry={geometry}>
       {/* Utilisation de meshBasicMaterial pour appliquer la texture à la surface du modèle */}
       <meshBasicMaterial toneMapped={false} map={colorMap} />
     </mesh>

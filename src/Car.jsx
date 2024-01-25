@@ -1,7 +1,9 @@
 import {useFrame, useLoader} from "@react-three/fiber";
 import {useEffect, useRef} from "react";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-import { useBox } from "@react-three/cannon";
+import { useBox, useRaycastVehicle } from "@react-three/cannon";
+import {useWheels} from "./useWheels";
+import { WheelDebug } from "./WheelDebug";
 
 
 //  the physics body properties define how the car behaves in the physics simulation,
@@ -19,10 +21,20 @@ export function Car(){
     const chassisBodyArgs=[width,height,front*2];
     const [chassisBody, chassisApi] = useBox(
         () => ({
-            args: chassisBodyArgs, mass: 150, position
+            args: chassisBodyArgs, mass: 150, position ,
         }),
         useRef(null),
         );
+    
+    const [wheels, wheelInfos] = useWheels(width,height,front,wheelRadius);
+
+    const [vehicle,vehicleAPi] = useRaycastVehicle(() => ({
+        chassisBody,
+        wheelInfos,
+        wheels,
+    }),
+    useRef(null)
+    );
 
 
     useEffect(() => {
@@ -30,9 +42,15 @@ export function Car(){
         mesh.children[0].position.set(-365,-18,-67);},[mesh]);
 
     return(
-        <mesh ref={chassisBody}>
-        <meshBasicMaterial transparent = {true} opacity={0.3} />
-        <boxGeometry args={chassisBodyArgs}/>
-        </mesh>
+        <group ref ={vehicle} name = "vehicle">
+            <mesh ref={chassisBody}>
+            <meshBasicMaterial transparent = {true} opacity={0.3} />
+            <boxGeometry args={chassisBodyArgs}/>
+            </mesh>
+            <WheelDebug wheelRef={wheels[0]} radius={wheelRadius} />
+            <WheelDebug wheelRef={wheels[1]} radius={wheelRadius} />
+            <WheelDebug wheelRef={wheels[2]} radius={wheelRadius} />
+            <WheelDebug wheelRef={wheels[3]} radius={wheelRadius} />
+        </group>
     );
 }
